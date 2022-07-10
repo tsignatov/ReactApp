@@ -42,7 +42,7 @@ function HomePage({removeCookie}) {
         <div>Price: {product.price}</div>
         <div>Color: {product.color}</div>
        </div> : null}
-       {message ? <div className='error-message'>
+       {message.length ? <div className='error-message'>
         {message}
        </div> : null}
       </div>
