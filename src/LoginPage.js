@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigate, useLocation } from 'react-router-dom'
 
 function LoginPage({ hasCookie, setCookie}) {
@@ -14,9 +14,13 @@ function LoginPage({ hasCookie, setCookie}) {
         username: '',
         password: '',
       });
-      const changeHandler = (e) => {
-        setData({...data, [e.target.name]: e.target.value})
-      }
+
+    useEffect(() => {
+        window.history.replaceState({}, document.title)
+    }, []);
+    const changeHandler = (e) => {
+      setData({...data, [e.target.name]: e.target.value})
+    }
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
