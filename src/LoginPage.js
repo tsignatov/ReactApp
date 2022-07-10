@@ -5,7 +5,7 @@ function LoginPage({ hasCookie, setCookie}) {
 
   const createCookie = (name,value,minutes) => { 
     let currentDate = new Date();
-    let futureDate = new Date(currentDate.getTime() + minutes*6000);
+    let futureDate = new Date(currentDate.getTime() + minutes*60000);
     setCookie(name,value, { path: '/',expires: futureDate});
 }
 
@@ -21,7 +21,7 @@ function LoginPage({ hasCookie, setCookie}) {
         e.preventDefault();
         fetch('/api/login', {method: 'POST', body: JSON.stringify( data)}).then(res => {
           if(res.status === 200) {
-            createCookie("isLoggedIn", true, 1);
+            createCookie("isLoggedIn", true, 5);
           }
         })
     
