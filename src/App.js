@@ -26,12 +26,12 @@ function App() {
   return (
     <div className="App">
      <Routes>
-     <Route path='/' element={<LoginPage  setCookie={setCookie} hasCookie={Object.keys(cookie).length}/>} />
-        <Route
+      <Route path='/' element={<LoginPage  setCookie={setCookie} hasCookie={Object.keys(cookie).length}/>} />
+      <Route
           path="home"
           element={
             <ProtectedRoute hasCookie={Object.keys(cookie).length}>
-              <HomePage hasCookie={Object.keys(cookie).length} cookie ={cookie} removeCookie={removeCookie}/>
+              <HomePage removeCookie={removeCookie}/>
             </ProtectedRoute>
           }
         />

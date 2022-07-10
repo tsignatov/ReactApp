@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 
 function LoginPage({ hasCookie, setCookie}) {
 
@@ -8,7 +8,8 @@ function LoginPage({ hasCookie, setCookie}) {
     let futureDate = new Date(currentDate.getTime() + minutes*60000);
     setCookie(name,value, { path: '/',expires: futureDate});
 }
-
+    const [errorMsg, setErrorMsg] = useState('')
+    const { state } = useLocation();
     const [data, setData] = useState({
         username: '',
         password: '',
@@ -22,14 +23,18 @@ function LoginPage({ hasCookie, setCookie}) {
         fetch('/api/login', {method: 'POST', body: JSON.stringify( data)}).then(res => {
           if(res.status === 200) {
             createCookie("isLoggedIn", true, 5);
+            setErrorMsg('')
+          } else if (res.status === 401) {
+            setErrorMsg("Invalid username or password")
           }
-        })
+        }).catch(error => console.log(error))
     
       }
     return (
       <div className="Login">
         {hasCookie ? <Navigate to={'/home'} replace /> : null}
             <div>
+              {errorMsg.length || state ? <div className="error-message">{errorMsg ? errorMsg : state.message}</div> : null}
             <h2>Login Page</h2>
             <form action="/home">
                 <p>
