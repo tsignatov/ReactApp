@@ -35,6 +35,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="*" element={Object.keys(cookie).length ? <HomePage removeCookie={removeCookie}/> : 
+          <LoginPage setCookie={setCookie} hasCookie={Object.keys(cookie).length}/>} />
       </Routes>
     </div>
   );
